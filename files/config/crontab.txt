@@ -1,0 +1,28 @@
+# do daily/weekly/monthly maintenance
+# min hour day month weekday user command
+0 * * * *    root run-parts /etc/periodic/hourly
+0 2 * * *    root run-parts /etc/periodic/daily
+0 3 * * 6    root run-parts /etc/periodic/weekly
+0 5 1 * *    root run-parts /etc/periodic/monthly
+
+# Cache Feeds Hourly
+15 * * * *    root sudo -u apache bash -c "/var/www/MISP/app/Console/cake Server cacheFeed 1 all"
+
+# Fetch Feeds Hourly
+25 * * * *    root sudo -u apache bash -c "/var/www/MISP/app/Console/cake Server fetchFeed 1 all"
+
+# Pull Servers Daily
+0 2 * * *     root sudo -u apache bash -c "/var/www/MISP/app/Console/cake Server pullAll 1"
+
+# Scan Attachments Daily
+0 2 * * *     root sudo -u apache bash -c "/var/www/MISP/app/Console/cake admin scanAttachment all"
+
+# Log Rotate Daily
+0 6 * * *     root logrotate /etc/logrotate.conf
+
+# Check User Validity Hourly
+{% if OIDC_CHECK_USER_VALIDITY %}
+# 0 * * * *     root sudo -u apache bash -c "/var/www/MISP/app/Console/cake user check_validity --update --block_invalid"
+{% else %}
+# 0 * * * *     root sudo -u apache bash -c "/var/www/MISP/app/Console/cake user check_validity --update"
+{% endif %}

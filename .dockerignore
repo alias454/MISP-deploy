@@ -1,0 +1,7 @@
+.idea
+.github
+docs
+terraform
+docker-compose.yml
+LICENSE
+README.md

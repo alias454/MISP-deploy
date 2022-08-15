@@ -1,0 +1,10 @@
+.env
+venv/
+
+# thanks mac
+.DS_Store
+
+# Code editors
+.idea
+.store
+.vscode
