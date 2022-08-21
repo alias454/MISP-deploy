@@ -5,17 +5,17 @@
 0 3 * * 6    root run-parts /etc/periodic/weekly
 0 5 1 * *    root run-parts /etc/periodic/monthly
 
-# Cache Feeds Hourly
-15 * * * *    root sudo -u apache bash -c "/var/www/MISP/app/Console/cake Server cacheFeed 1 all"
+# Cache Feeds Daily
+15 3git add fi   * * *    root sudo -u apache bash -c "/var/www/MISP/app/Console/cake Server cacheFeed 1 all"
 
-# Fetch Feeds Hourly
-25 * * * *    root sudo -u apache bash -c "/var/www/MISP/app/Console/cake Server fetchFeed 1 all"
+# Fetch Feeds Daily
+25 2 * * *    root sudo -u apache bash -c "/var/www/MISP/app/Console/cake Server fetchFeed 1 all"
 
 # Pull Servers Daily
-0 2 * * *     root sudo -u apache bash -c "/var/www/MISP/app/Console/cake Server pullAll 1"
+0 1 * * *     root sudo -u apache bash -c "/var/www/MISP/app/Console/cake Server pullAll 1"
 
 # Scan Attachments Daily
-0 2 * * *     root sudo -u apache bash -c "/var/www/MISP/app/Console/cake admin scanAttachment all"
+0 0 * * *     root sudo -u apache bash -c "/var/www/MISP/app/Console/cake admin scanAttachment all"
 
 # Log Rotate Daily
 0 6 * * *     root logrotate /etc/logrotate.conf
