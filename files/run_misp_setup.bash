@@ -92,6 +92,6 @@ else
     systemctl enable --now mariadb.service
     systemctl enable --now redis.service
     systemctl enable --now supervisord.service
-    systemctl enable --now misp_sql_setup.service
+    systemctl enable --now misp-sql-setup.service
     systemctl enable --now misp-modules.service
 fi
