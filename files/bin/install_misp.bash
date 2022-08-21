@@ -21,21 +21,23 @@ git submodule update --depth 1 --init --recursive .
 # Install MISP composer dependencies
 cd /var/www/MISP/app
 
+chown -R apache:apache /var/www/MISP
+
 # Require exact version of `symfony/polyfill-php80` to keep compatibility,
 # later version replaces Attribute class :/
-php composer.phar --no-cache require --update-no-dev \
+sudo -u apache bash -c "php composer.phar --no-cache require --update-no-dev \
     symfony/polyfill-php80:v1.18.1 \
     jakub-onderka/openid-connect-php:1.0.0 \
     cakephp/cakephp:2.10.24 \
     supervisorphp/supervisor \
     guzzlehttp/guzzle \
     sentry/sdk \
-    php-http/message
+    php-http/message"
 
 # Remove unused packages
-php composer.phar --no-cache remove --update-no-dev \
+sudo -u apache bash -c "php composer.phar --no-cache remove --update-no-dev \
     monolog/monolog \
-    kamisama/cake-resque
+    kamisama/cake-resque"
 
 # Create attachments folder
 mkdir -p /var/www/MISP/app/attachments
