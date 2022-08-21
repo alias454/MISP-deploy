@@ -81,7 +81,7 @@ def gen_pass(length: int = 15):
     if not isinstance(length, int) or length < 12:
         raise ValueError("Minimum password length is 12")
 
-    alphabet = string.ascii_letters + string.digits + '-_^&*()'
+    alphabet = string.ascii_letters + string.digits + '!@#-_^*()'
     password = ''.join(secrets.choice(alphabet) for _ in range(length))
     return password
 
