@@ -92,7 +92,7 @@ echo "${cert_gen_message}"
 # openssl newer than 1.1.1 supports the -addext option
 openssl req -new -x509 -newkey rsa:4096 -days 365 -nodes \
 -subj "/C=${C}/ST=${ST}/L=${L}/O=${O}/OU=${OU}/CN=${CN}" \
--addext "keyUsage=keyCertSign, cRLSign, keyEncipherment, dataEncipherment" \
+-addext "keyUsage=nonRepudiation, digitalSignature, keyEncipherment, dataEncipherment" \
 -addext "extendedKeyUsage=serverAuth" \
 -addext "subjectAltName=${SAN}" \
 -keyout "${ca_key_path}" -out "${ca_cert_path}"
